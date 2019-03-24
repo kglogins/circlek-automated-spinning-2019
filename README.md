@@ -14,7 +14,9 @@ chromedriver.exe, depending on the system you are using.
 
 _**number**_ variable needs to be filled with numbers.
 
-Also make sure you have installed Selenium package.
+Make sure you have installed Selenium package.
+
+_**index.py**_ is the file you need to execute in order to run the script.
 
 ## Author
 
