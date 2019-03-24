@@ -8,7 +8,7 @@ from selenium import webdriver
 import time
 
 # This path needs to be changed depending on system you are using
-webdriverLocation = '/Users/kglogins/Documents/python_exercise/automated_spinning/src/chromedriver'
+webdriverLocation = 'C:\\Users\\karli\\Documents\\Website projects\\automated_spinning\\src\\chromedriver.exe'
 
 browser = webdriver.Chrome(webdriverLocation)
 
@@ -16,11 +16,11 @@ print('Getting ready...')
 
 time.sleep(2)
 
-# numbers = [
-#     ....,
-#     ....,
-#     ....
-# ]
+numbers = [
+    ....,
+    ....,
+    ....
+]
 
 for number in numbers:
 
@@ -29,19 +29,19 @@ for number in numbers:
     time.sleep(2)
 
     input = browser.find_element_by_name('pid')
-    print 'Sending keys for number:', number
+    print('Sending keys for number:', number)
     input.send_keys(number)
 
     time.sleep(0.5)
 
     checkbox = browser.find_element_by_name('permission')
-    print 'Clicking agree on terms'
+    print('Clicking agree on terms')
     checkbox.click()
 
     time.sleep(0.5)
 
     submit = browser.find_element_by_class_name('undefined')
-    print 'Clicking submit'
+    print('Clicking submit')
     submit.click()
 
     time.sleep(3)
@@ -50,32 +50,32 @@ for number in numbers:
     spinCountLeft = int(spinCountLeft.text)
 
     if spinCountLeft == 0:
-        print '0 spins left'
+        print('0 spins left')
     else:
         while spinCountLeft != 0:
             spinButton = browser.find_element_by_class_name('game-btn')
-            print 'Spinning! Good luck!'
+            print('Spinning! Good luck!')
             spinButton.click()
             time.sleep(6)
             browser.get('https://www.laimesrats.lv')
-            print 'Refreshing page'
+            print('Refreshing page')
             time.sleep(2)
             spinCountLeft = browser.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/div[2]/div[1]/div[2]')
             spinCountLeft = int(spinCountLeft.text)
-            print spinCountLeft, 'spins left'
+            print(spinCountLeft, 'spins left')
 
     menuButton = browser.find_element_by_class_name('bm-menu-button')
-    print 'Selecting menu'
+    print('Selecting menu')
 
     menuButton.click()
 
     time.sleep(1)
 
     logout = browser.find_element_by_class_name('bm-logout')
-    print 'Logging out'
+    print('Logging out')
 
     logout.click()
 
     time.sleep(2)
 
-print 'Script ended successfully'
+print('Script ended successfully')
