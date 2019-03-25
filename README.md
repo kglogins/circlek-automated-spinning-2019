@@ -9,7 +9,7 @@ There are two webdrivers for Google Chrome in repository:
 * For **Windows** (chromedriver.exe)
 * For **Mac** (chromedriver)
 
-_**webdriverLocation**_ variable needs to be filled with the path to the neither chromedriver or 
+_**webdriverLocation**_ variable needs to be filled with the path to the either chromedriver or 
 chromedriver.exe, depending on the system you are using.
 
 _**number**_ variable needs to be filled with numbers.
