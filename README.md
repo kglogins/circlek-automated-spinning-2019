@@ -12,7 +12,7 @@ There are two webdrivers for Google Chrome in repository:
 _**webdriverLocation**_ variable needs to be filled with the path to the either chromedriver or 
 chromedriver.exe, depending on the system you are using.
 
-_**number**_ variable needs to be filled with numbers.
+**_numbers.py_** file is for numbers to be each written in new line.
 
 Make sure you have installed Selenium package.
 
