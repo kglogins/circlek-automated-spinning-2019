@@ -5,17 +5,22 @@
 #
 
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
-import numbers
+
 
 # This path needs to be changed depending on system you are using
 webdriverLocation = '/Users/kglogins/Documents/python_exercise/automated_spinning/src/chromedriver'
 
 browser = webdriver.Chrome(webdriverLocation)
 
+wait = WebDriverWait(browser, 15)
+
 print('Getting ready...')
 
-time.sleep(2)
+time.sleep(0.5)
 
 with open('src/numbers.py') as file:
     numbers = file.readlines()
@@ -24,28 +29,30 @@ for number in numbers:
 
     browser.get('https://www.laimesrats.lv')
 
-    time.sleep(2)
-
-    input = browser.find_element_by_name('pid')
+    #input = browser.find_element_by_name('pid')
+    input = wait.until(EC.presence_of_element_located((By.NAME, 'pid')))
     print('Sending keys for number:', number.rstrip())
     input.send_keys(number.rstrip())
 
     time.sleep(0.5)
 
-    checkbox = browser.find_element_by_name('permission')
+    #checkbox = browser.find_element_by_name('permission')
+    checkbox = wait.until(EC.presence_of_element_located((By.NAME, 'permission')))
     print('Clicking agree on terms')
     checkbox.click()
 
     time.sleep(0.5)
 
-    submit = browser.find_element_by_class_name('undefined')
+    #submit = browser.find_element_by_class_name('undefined')
+    submit = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'undefined')))
     print('Clicking submit')
 
     submit.click()
 
     time.sleep(1)
 
-    loader = browser.find_element_by_class_name('bm-container-loader')
+    #loader = browser.find_element_by_class_name('bm-container-loader')
+    loader = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'bm-container-loader')))
     loaderDisplay = loader.value_of_css_property('display')
 
     while loaderDisplay == 'block':
@@ -57,7 +64,8 @@ for number in numbers:
 
     print('Loader is not in place')
 
-    modal = browser.find_element_by_class_name('bm-container-modal')
+    #modal = browser.find_element_by_class_name('bm-container-modal')
+    modal = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'bm-container-modal')))
     modalDisplay = modal.value_of_css_property('display')
 
     while modalDisplay == 'block':
@@ -67,37 +75,40 @@ for number in numbers:
 
     print('Modal is not in place')
 
-    time.sleep(1)
-
-    spinCountLeft = browser.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/div[2]/div[1]/div[2]')
+    #spinCountLeft = browser.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/div[2]/div[1]/div[2]')
+    spinCountLeft = wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[3]/div/div[1]/div/div[2]/div[1]/div[2]')))
     spinCountLeft = int(spinCountLeft.text)
 
     if spinCountLeft == 0:
         print('0 spins left')
     else:
         while spinCountLeft != 0:
-            spinButton = browser.find_element_by_class_name('game-btn')
+            #spinButton = browser.find_element_by_class_name('game-btn')
+            spinButton = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'game-btn')))
             print('Spinning! Good luck!')
             spinButton.click()
             time.sleep(6)
             browser.get('https://www.laimesrats.lv')
             print('Refreshing page')
-            time.sleep(2)
-            spinCountLeft = browser.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/div[2]/div[1]/div[2]')
+            time.sleep(0.5)
+            #spinCountLeft = browser.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/div[2]/div[1]/div[2]')
+            spinCountLeft = wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[3]/div/div[1]/div/div[2]/div[1]/div[2]')))
             spinCountLeft = int(spinCountLeft.text)
             print(spinCountLeft, 'spins left')
 
-    menuButton = browser.find_element_by_class_name('bm-menu-button')
+    #menuButton = browser.find_element_by_class_name('bm-menu-button')
+    menuButton = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'bm-menu-button')))
     print('Selecting menu')
 
     menuButton.click()
 
-    time.sleep(1)
+    #time.sleep(1)
 
-    logout = browser.find_element_by_class_name('bm-logout')
+    #logout = browser.find_element_by_class_name('bm-logout')
+    logout = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'bm-logout')))
     print('Logging out')
 
-    logout.click()
+    logout = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'bm-logout'))).click()
 
     time.sleep(2)
 
