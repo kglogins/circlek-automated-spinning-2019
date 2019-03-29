@@ -6,9 +6,10 @@
 
 from selenium import webdriver
 import time
+import numbers
 
 # This path needs to be changed depending on system you are using
-webdriverLocation = 'C:\\Users\\karli\\Documents\\Website projects\\automated_spinning\\src\\chromedriver.exe'
+webdriverLocation = '/Users/kglogins/Documents/python_exercise/automated_spinning/src/chromedriver'
 
 browser = webdriver.Chrome(webdriverLocation)
 
@@ -16,11 +17,8 @@ print('Getting ready...')
 
 time.sleep(2)
 
-numbers = [
-    ....,
-    ....,
-    ....
-]
+with open('src/numbers.py') as file:
+    numbers = file.readlines()
 
 for number in numbers:
 
@@ -29,8 +27,8 @@ for number in numbers:
     time.sleep(2)
 
     input = browser.find_element_by_name('pid')
-    print('Sending keys for number:', number)
-    input.send_keys(number)
+    print('Sending keys for number:', number.rstrip())
+    input.send_keys(number.rstrip())
 
     time.sleep(0.5)
 
@@ -42,9 +40,34 @@ for number in numbers:
 
     submit = browser.find_element_by_class_name('undefined')
     print('Clicking submit')
+
     submit.click()
 
-    time.sleep(3)
+    time.sleep(1)
+
+    loader = browser.find_element_by_class_name('bm-container-loader')
+    loaderDisplay = loader.value_of_css_property('display')
+
+    while loaderDisplay == 'block':
+        time.sleep(0.5)
+        print('Loader is in place')
+        loaderDisplay = loader.value_of_css_property('display')
+
+    time.sleep(1)
+
+    print('Loader is not in place')
+
+    modal = browser.find_element_by_class_name('bm-container-modal')
+    modalDisplay = modal.value_of_css_property('display')
+
+    while modalDisplay == 'block':
+        time.sleep(0.5)
+        print('Modal is in place')
+        modalDisplay = modal.value_of_css_property('display')
+
+    print('Modal is not in place')
+
+    time.sleep(1)
 
     spinCountLeft = browser.find_element_by_xpath('/html/body/div[3]/div/div[1]/div/div[2]/div[1]/div[2]')
     spinCountLeft = int(spinCountLeft.text)
