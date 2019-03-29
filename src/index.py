@@ -12,7 +12,7 @@ import time
 
 
 # This path needs to be changed depending on system you are using
-webdriverLocation = '/Users/kglogins/Documents/python_exercise/automated_spinning/src/chromedriver'
+webdriverLocation = '/usr/lib/chromium-browser/chromedriver'
 
 browser = webdriver.Chrome(webdriverLocation)
 
