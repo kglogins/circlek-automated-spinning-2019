@@ -12,8 +12,6 @@ import time
 import os
 import platform
 
-# This path needs to be changed depending on system you are using
-
 pathToScript = os.path.dirname(os.path.realpath(__file__)) + '/'
 
 system = platform.system()
@@ -31,7 +29,6 @@ if system == 'Linux':
 
 
 webdriverLocation = pathToScript + webdriverName
-# webdriverLocation = '/usr/lib/chromium-browser/chromedriver'
 
 browser = webdriver.Chrome(webdriverLocation)
 
