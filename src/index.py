@@ -10,7 +10,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-
 # This path needs to be changed depending on system you are using
 webdriverLocation = '/usr/lib/chromium-browser/chromedriver'
 
@@ -18,14 +17,19 @@ browser = webdriver.Chrome(webdriverLocation)
 
 wait = WebDriverWait(browser, 15)
 
-print('Getting ready...')
+spacer = '------------------------------'
+
+print(spacer)
+print(time.strftime('%d-%m-%Y %H:%M:%S', time.gmtime()))
+print(spacer)
+print('Getting ready...\n')
 
 time.sleep(0.5)
 
-with open('src/numbers.py') as file:
+with open('numbers.py') as file:
     numbers = file.readlines()
 
-if len(numbers[0].rstrip()) != 0:
+if len(numbers) != 0:
     for number in numbers:
 
         browser.get('https://www.laimesrats.lv')
@@ -97,14 +101,14 @@ if len(numbers[0].rstrip()) != 0:
         menuButton.click()
 
         logout = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'bm-logout')))
-        print('Logging out')
+        print('Logging out\n')
 
         logout = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'bm-logout'))).click()
 
         time.sleep(2)
 else:
-    print('0 numbers entered')
+    print('0 numbers entered\n')
 
 browser.close()
 
-print('Script ended successfully')
+print('Script ended successfully\n')
