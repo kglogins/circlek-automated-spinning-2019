@@ -9,9 +9,28 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import os
+import platform
 
 # This path needs to be changed depending on system you are using
-webdriverLocation = '/usr/lib/chromium-browser/chromedriver'
+
+pathToScript = os.path.dirname(os.path.realpath(__file__))
+
+system = platform.system()
+
+if system == 'Windows':
+    pathToScript = pathToScript.replace('\\', '\\\\') + '\\\\'
+    webdriverName = 'chromedriver-win.exe'
+
+if system == 'Darwin':
+    webdriverName = 'chromedriver-mac'
+
+if system == 'Linux':
+    webdriverName = 'chromedriver-pi'
+
+
+webdriverLocation = pathToScript + webdriverName
+# webdriverLocation = '/usr/lib/chromium-browser/chromedriver'
 
 browser = webdriver.Chrome(webdriverLocation)
 
@@ -22,11 +41,12 @@ spacer = '------------------------------'
 print(spacer)
 print(time.strftime('%d-%m-%Y %H:%M:%S', time.gmtime()))
 print(spacer)
-print('Getting ready...\n')
+print('OS: ' + system)
+print('\nGetting ready...\n')
 
 time.sleep(0.5)
 
-with open('numbers.py') as file:
+with open(pathToScript + 'numbers.py') as file:
     numbers = file.readlines()
 
 if len(numbers) != 0:
