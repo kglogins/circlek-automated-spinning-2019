@@ -18,7 +18,7 @@ system = platform.system()
 
 if system == 'Windows':
     pathToScript = pathToScript.replace('/', '\\')
-    pathToScript = pathToScript.replace('\\', '\\\\') + '\\\\'
+    pathToScript = pathToScript.replace('\\', '\\\\')
     webdriverName = 'chromedriver-win.exe'
 
 if system == 'Darwin':
