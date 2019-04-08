@@ -84,7 +84,7 @@ def main():
                 if counter == 10:
                     break
                 else:
-                    counter++
+                    counter = counter + 1
 
             time.sleep(1)
 
@@ -102,7 +102,7 @@ def main():
                 if counter == 10:
                     break
                 else:
-                    counter++
+                    counter = counter + 1
 
             print('Modal is not in place')
 
