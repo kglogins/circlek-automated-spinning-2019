@@ -12,39 +12,39 @@ import time
 import os
 import platform
 
-pathToScript = os.path.dirname(os.path.realpath(__file__)) + '/'
-
-system = platform.system()
-
-if system == 'Windows':
-    pathToScript = pathToScript.replace('/', '\\')
-    pathToScript = pathToScript.replace('\\', '\\\\')
-    webdriverName = 'chromedriver-win.exe'
-
-if system == 'Darwin':
-    webdriverName = 'chromedriver-mac'
-
-if system == 'Linux':
-    webdriverName = 'chromedriver-pi'
-
-
-webdriverLocation = pathToScript + webdriverName
-
-browser = webdriver.Chrome(webdriverLocation)
-
-wait = WebDriverWait(browser, 15)
-
-spacer = '------------------------------'
-
-print(spacer)
-print(time.strftime('%d-%m-%Y %H:%M:%S', time.gmtime()))
-print(spacer)
-print('OS: ' + system)
-print('\nGetting ready...\n')
-
-time.sleep(0.5)
-
 def main():
+    pathToScript = os.path.dirname(os.path.realpath(__file__)) + '/'
+
+    system = platform.system()
+
+    if system == 'Windows':
+        pathToScript = pathToScript.replace('/', '\\')
+        pathToScript = pathToScript.replace('\\', '\\\\')
+        webdriverName = 'chromedriver-win.exe'
+
+    if system == 'Darwin':
+        webdriverName = 'chromedriver-mac'
+
+    if system == 'Linux':
+        webdriverName = 'chromedriver-pi'
+
+
+    webdriverLocation = pathToScript + webdriverName
+
+    browser = webdriver.Chrome(webdriverLocation)
+
+    wait = WebDriverWait(browser, 15)
+
+    spacer = '------------------------------'
+
+    print(spacer)
+    print(time.strftime('%d-%m-%Y %H:%M:%S', time.gmtime()))
+    print(spacer)
+    print('OS: ' + system)
+    print('\nGetting ready...\n')
+
+    time.sleep(0.5)
+
     with open(pathToScript + 'numbers.py') as file:
         numbers = file.readlines()
 
