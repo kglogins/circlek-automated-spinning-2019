@@ -28,7 +28,10 @@ def main():
     if system == 'Linux':
         webdriverName = 'chromedriver-pi'
 
+
     webdriverLocation = pathToScript + webdriverName
+
+    print(webdriverLocation)
 
     browser = webdriver.Chrome(webdriverLocation)
 
