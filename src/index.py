@@ -28,7 +28,6 @@ def main():
     if system == 'Linux':
         webdriverName = 'chromedriver-pi'
 
-
     webdriverLocation = pathToScript + webdriverName
 
     browser = webdriver.Chrome(webdriverLocation)
@@ -147,6 +146,6 @@ def main():
 
 try:
     main()
-except Exception, error:
+except Exception as error:
     print('Error: ', error)
     print('\nScript ended with errors!\n')
