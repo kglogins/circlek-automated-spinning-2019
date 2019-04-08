@@ -8,6 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
 import time
 import os
 import platform
@@ -117,9 +118,25 @@ def main():
             else:
                 while spinCountLeft != 0:
                     spinButton = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'game-btn')))
+                    spinButton = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'game-btn'))).click()
                     print('Spinning! Good luck!')
-                    spinButton.click()
-                    time.sleep(6)
+                    time.sleep(4)
+                    headline = wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/div[3]/div/div[2]/div/div/div/div/div[1]/div[1]/div/div/div[1]')))
+                    headline = headline.text
+                    print(headline.encode('utf-8'))
+
+                    try:
+                        prizeTitle = browser.find_element_by_class_name('prizeTitle')
+                        prizeTitle = prizeTitle.text
+                        print(prizeTitle.encode('utf-8'))
+                    except NoSuchElementException:
+                        print("No element found")
+
+                    # if browser.find_element_by_class_name('prizeTitle'):
+                    #     prizeTitle = browser.find_element_by_class('prizeTitle').text
+                    #     print(prizeTitle.encode('utf-8'))
+
+                    time.sleep(0.5)
                     browser.get('https://www.laimesrats.lv')
                     print('Refreshing page')
                     time.sleep(0.5)
