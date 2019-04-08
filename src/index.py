@@ -44,89 +44,95 @@ print('\nGetting ready...\n')
 
 time.sleep(0.5)
 
-with open(pathToScript + 'numbers.py') as file:
-    numbers = file.readlines()
+def main():
+    with open(pathToScript + 'numbers.py') as file:
+        numbers = file.readlines()
 
-if len(numbers) != 0:
-    for number in numbers:
+    if len(numbers) != 0:
+        for number in numbers:
 
-        browser.get('https://www.laimesrats.lv')
+            browser.get('https://www.laimesrats.lv')
 
-        input = wait.until(EC.presence_of_element_located((By.NAME, 'pid')))
-        print('Sending keys for number:', number.rstrip())
-        input.send_keys(number.rstrip())
+            input = wait.until(EC.presence_of_element_located((By.NAME, 'pid')))
+            print('Sending keys for number:', number.rstrip())
+            input.send_keys(number.rstrip())
 
-        time.sleep(0.5)
-
-        checkbox = wait.until(EC.presence_of_element_located((By.NAME, 'permission')))
-        print('Clicking agree on terms')
-        checkbox.click()
-
-        time.sleep(0.5)
-
-        submit = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'undefined')))
-        print('Clicking submit')
-
-        submit.click()
-
-        time.sleep(1)
-
-        loader = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'bm-container-loader')))
-        loaderDisplay = loader.value_of_css_property('display')
-
-        while loaderDisplay == 'block':
             time.sleep(0.5)
-            print('Loader is in place')
+
+            checkbox = wait.until(EC.presence_of_element_located((By.NAME, 'permission')))
+            print('Clicking agree on terms')
+            checkbox.click()
+
+            time.sleep(0.5)
+
+            submit = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'undefined')))
+            print('Clicking submit')
+
+            submit.click()
+
+            time.sleep(1)
+
+            loader = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'bm-container-loader')))
             loaderDisplay = loader.value_of_css_property('display')
 
-        time.sleep(1)
+            while loaderDisplay == 'block':
+                time.sleep(0.5)
+                print('Loader is in place')
+                loaderDisplay = loader.value_of_css_property('display')
 
-        print('Loader is not in place')
+            time.sleep(1)
 
-        modal = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'bm-container-modal')))
-        modalDisplay = modal.value_of_css_property('display')
+            print('Loader is not in place')
 
-        while modalDisplay == 'block':
-            time.sleep(0.5)
-            print('Modal is in place')
+            modal = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'bm-container-modal')))
             modalDisplay = modal.value_of_css_property('display')
 
-        print('Modal is not in place')
-
-        spinCountLeft = wait.until(
-            EC.presence_of_element_located((By.XPATH, '/html/body/div[3]/div/div[1]/div/div[2]/div[1]/div[2]')))
-        spinCountLeft = int(spinCountLeft.text)
-
-        if spinCountLeft == 0:
-            print('0 spins left')
-        else:
-            while spinCountLeft != 0:
-                spinButton = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'game-btn')))
-                print('Spinning! Good luck!')
-                spinButton.click()
-                time.sleep(6)
-                browser.get('https://www.laimesrats.lv')
-                print('Refreshing page')
+            while modalDisplay == 'block':
                 time.sleep(0.5)
-                spinCountLeft = wait.until(
-                    EC.presence_of_element_located((By.XPATH, '/html/body/div[3]/div/div[1]/div/div[2]/div[1]/div[2]')))
-                spinCountLeft = int(spinCountLeft.text)
-                print(spinCountLeft, 'spins left')
+                print('Modal is in place')
+                modalDisplay = modal.value_of_css_property('display')
 
-        menuButton = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'bm-menu-button')))
-        print('Selecting menu')
+            print('Modal is not in place')
 
-        menuButton.click()
+            spinCountLeft = wait.until(
+                EC.presence_of_element_located((By.XPATH, '/html/body/div[3]/div/div[1]/div/div[2]/div[1]/div[2]')))
+            spinCountLeft = int(spinCountLeft.text)
 
-        logout = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'bm-logout')))
-        print('Logging out\n')
+            if spinCountLeft == 0:
+                print('0 spins left')
+            else:
+                while spinCountLeft != 0:
+                    spinButton = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'game-btn')))
+                    print('Spinning! Good luck!')
+                    spinButton.click()
+                    time.sleep(6)
+                    browser.get('https://www.laimesrats.lv')
+                    print('Refreshing page')
+                    time.sleep(0.5)
+                    spinCountLeft = wait.until(
+                        EC.presence_of_element_located((By.XPATH, '/html/body/div[3]/div/div[1]/div/div[2]/div[1]/div[2]')))
+                    spinCountLeft = int(spinCountLeft.text)
+                    print(spinCountLeft, 'spins left')
 
-        logout = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'bm-logout'))).click()
+            menuButton = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'bm-menu-button')))
+            print('Selecting menu')
 
-        time.sleep(2)
-else:
-    print('0 numbers entered\n')
+            menuButton.click()
 
-browser.close()
+            logout = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'bm-logout')))
+            print('Logging out\n')
 
-print('Script ended successfully\n')
+            logout = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'bm-logout'))).click()
+
+            time.sleep(2)
+    else:
+        print('0 numbers entered\n')
+
+    browser.close()
+
+    print('Script ended successfully\n')
+
+try:
+    main()
+except Exception, error:
+    echo('Error: ', error)
