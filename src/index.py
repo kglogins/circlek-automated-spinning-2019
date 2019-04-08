@@ -135,4 +135,4 @@ def main():
 try:
     main()
 except Exception, error:
-    prints('Error: ', error)
+    print('Error: ', error)
