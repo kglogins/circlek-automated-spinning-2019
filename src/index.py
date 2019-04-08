@@ -32,8 +32,6 @@ def main():
 
     webdriverLocation = pathToScript + webdriverName
 
-    print(webdriverLocation)
-
     browser = webdriver.Chrome(webdriverLocation)
 
     wait = WebDriverWait(browser, 15)
