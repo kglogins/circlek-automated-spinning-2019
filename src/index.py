@@ -116,7 +116,7 @@ if len(numbers) != 0:
         menuButton = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'bm-menu-button')))
         print('Selecting menu')
 
-        menuButton.click()
+        menuButton = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'bm-menu-button'))).click()
 
         logout = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'bm-logout')))
         print('Logging out\n')
