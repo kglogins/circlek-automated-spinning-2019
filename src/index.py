@@ -150,5 +150,5 @@ def main():
 try:
     main()
 except Exception as error:
-    print('Error: ', error)
+    print('\nError: ', error)
     print('\nScript ended with errors!\n')
