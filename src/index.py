@@ -130,9 +130,10 @@ def main():
 
     browser.close()
 
-    print('Script ended successfully\n')
-
 try:
     main()
 except Exception, error:
     print('Error: ', error)
+    print('\n')
+
+print('Script ended\n')
