@@ -135,4 +135,4 @@ def main():
 try:
     main()
 except Exception, error:
-    echo('Error: ', error)
+    prints('Error: ', error)
