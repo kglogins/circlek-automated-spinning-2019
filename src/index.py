@@ -144,6 +144,7 @@ def main():
 
     print('Script ended successfully\n')
 
+
 try:
     main()
 except Exception, error:
